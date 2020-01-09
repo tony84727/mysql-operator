@@ -1,0 +1,5 @@
+# gazelle:exclude vendor
+load("@bazel_gazelle//:def.bzl", "gazelle")
+
+# gazelle:prefix github.com/oracle/mysql-operator
+gazelle(name = "gazelle")

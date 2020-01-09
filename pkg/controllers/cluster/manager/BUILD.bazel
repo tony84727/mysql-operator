@@ -1,0 +1,40 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "go_default_library",
+    srcs = [
+        "cluster_manager.go",
+        "innodb_cluster.go",
+        "metrics.go",
+    ],
+    importpath = "github.com/oracle/mysql-operator/pkg/controllers/cluster/manager",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//pkg/cluster:go_default_library",
+        "//pkg/cluster/innodb:go_default_library",
+        "//pkg/controllers/cluster/labeler:go_default_library",
+        "//pkg/util/metrics:go_default_library",
+        "//pkg/util/mysqlsh:go_default_library",
+        "@com_github_golang_glog//:go_default_library",
+        "@com_github_pkg_errors//:go_default_library",
+        "@io_k8s_apimachinery//pkg/api/errors:go_default_library",
+        "@io_k8s_apimachinery//pkg/apis/meta/v1:go_default_library",
+        "@io_k8s_apimachinery//pkg/util/runtime:go_default_library",
+        "@io_k8s_apimachinery//pkg/util/wait:go_default_library",
+        "@io_k8s_client_go//informers:go_default_library",
+        "@io_k8s_client_go//kubernetes:go_default_library",
+        "@io_k8s_client_go//util/retry:go_default_library",
+        "@io_k8s_utils//exec:go_default_library",
+    ],
+)
+
+go_test(
+    name = "go_default_test",
+    srcs = ["innodb_cluster_test.go"],
+    embed = [":go_default_library"],
+    deps = [
+        "//pkg/cluster:go_default_library",
+        "@com_github_stretchr_testify//assert:go_default_library",
+        "@com_github_stretchr_testify//require:go_default_library",
+    ],
+)

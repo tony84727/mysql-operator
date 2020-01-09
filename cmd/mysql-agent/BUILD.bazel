@@ -1,0 +1,23 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "go_default_library",
+    srcs = ["main.go"],
+    importpath = "github.com/oracle/mysql-operator/cmd/mysql-agent",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//cmd/mysql-agent/app:go_default_library",
+        "//pkg/options/agent:go_default_library",
+        "//pkg/version:go_default_library",
+        "@com_github_golang_glog//:go_default_library",
+        "@com_github_spf13_pflag//:go_default_library",
+        "@io_k8s_apiserver//pkg/util/flag:go_default_library",
+        "@io_k8s_apiserver//pkg/util/logs:go_default_library",
+    ],
+)
+
+go_binary(
+    name = "mysql-agent",
+    embed = [":go_default_library"],
+    visibility = ["//visibility:public"],
+)

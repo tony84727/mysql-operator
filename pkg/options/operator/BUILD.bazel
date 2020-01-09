@@ -1,0 +1,23 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "go_default_library",
+    srcs = ["options.go"],
+    importpath = "github.com/oracle/mysql-operator/pkg/options/operator",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//pkg/apis/mysql/v1alpha1:go_default_library",
+        "@com_github_golang_glog//:go_default_library",
+        "@com_github_pkg_errors//:go_default_library",
+        "@com_github_spf13_pflag//:go_default_library",
+        "@in_gopkg_yaml_v2//:go_default_library",
+        "@io_k8s_apimachinery//pkg/apis/meta/v1:go_default_library",
+    ],
+)
+
+go_test(
+    name = "go_default_test",
+    srcs = ["options_test.go"],
+    embed = [":go_default_library"],
+    deps = ["@io_k8s_apimachinery//pkg/apis/meta/v1:go_default_library"],
+)

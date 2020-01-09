@@ -1,0 +1,12 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "go_default_library",
+    srcs = ["executor.go"],
+    importpath = "github.com/oracle/mysql-operator/pkg/backup/executor",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//pkg/apis/mysql/v1alpha1:go_default_library",
+        "//pkg/backup/executor/mysqldump:go_default_library",
+    ],
+)

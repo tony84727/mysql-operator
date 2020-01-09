@@ -1,0 +1,9 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "go_default_library",
+    srcs = ["utils.go"],
+    importpath = "github.com/oracle/mysql-operator/pkg/util/kube",
+    visibility = ["//visibility:public"],
+    deps = ["@io_k8s_apimachinery//pkg/apis/meta/v1:go_default_library"],
+)

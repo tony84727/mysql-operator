@@ -1,0 +1,36 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "go_default_library",
+    srcs = ["statefulset.go"],
+    importpath = "github.com/oracle/mysql-operator/pkg/resources/statefulsets",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//pkg/apis/mysql/v1alpha1:go_default_library",
+        "//pkg/constants:go_default_library",
+        "//pkg/options/agent:go_default_library",
+        "//pkg/options/operator:go_default_library",
+        "//pkg/resources/secrets:go_default_library",
+        "//pkg/version:go_default_library",
+        "@com_github_coreos_go_semver//semver:go_default_library",
+        "@io_k8s_api//apps/v1beta1:go_default_library",
+        "@io_k8s_api//core/v1:go_default_library",
+        "@io_k8s_apimachinery//pkg/apis/meta/v1:go_default_library",
+        "@io_k8s_apimachinery//pkg/runtime/schema:go_default_library",
+        "@io_k8s_apimachinery//pkg/util/intstr:go_default_library",
+    ],
+)
+
+go_test(
+    name = "go_default_test",
+    srcs = ["statefulset_test.go"],
+    embed = [":go_default_library"],
+    deps = [
+        "//pkg/apis/mysql/v1alpha1:go_default_library",
+        "//pkg/options/operator:go_default_library",
+        "@com_github_stretchr_testify//assert:go_default_library",
+        "@io_k8s_api//core/v1:go_default_library",
+        "@io_k8s_apimachinery//pkg/api/resource:go_default_library",
+        "@io_k8s_apimachinery//pkg/apis/meta/v1:go_default_library",
+    ],
+)

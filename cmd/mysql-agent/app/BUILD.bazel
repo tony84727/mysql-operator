@@ -1,0 +1,28 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "go_default_library",
+    srcs = ["mysql_agent.go"],
+    importpath = "github.com/oracle/mysql-operator/cmd/mysql-agent/app",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//pkg/cluster:go_default_library",
+        "//pkg/controllers/backup:go_default_library",
+        "//pkg/controllers/cluster/manager:go_default_library",
+        "//pkg/controllers/restore:go_default_library",
+        "//pkg/generated/clientset/versioned:go_default_library",
+        "//pkg/generated/clientset/versioned/scheme:go_default_library",
+        "//pkg/generated/informers/externalversions:go_default_library",
+        "//pkg/options/agent:go_default_library",
+        "//pkg/util/metrics:go_default_library",
+        "//pkg/util/signals:go_default_library",
+        "@com_github_golang_glog//:go_default_library",
+        "@com_github_heptiolabs_healthcheck//:go_default_library",
+        "@com_github_pkg_errors//:go_default_library",
+        "@com_github_prometheus_client_golang//prometheus:go_default_library",
+        "@io_k8s_client_go//informers:go_default_library",
+        "@io_k8s_client_go//kubernetes:go_default_library",
+        "@io_k8s_client_go//kubernetes/scheme:go_default_library",
+        "@io_k8s_client_go//rest:go_default_library",
+    ],
+)

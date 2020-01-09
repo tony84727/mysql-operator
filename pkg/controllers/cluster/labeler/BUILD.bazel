@@ -1,0 +1,50 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "go_default_library",
+    srcs = [
+        "cluster_labeler.go",
+        "selectors.go",
+    ],
+    importpath = "github.com/oracle/mysql-operator/pkg/controllers/cluster/labeler",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//pkg/cluster:go_default_library",
+        "//pkg/cluster/innodb:go_default_library",
+        "//pkg/constants:go_default_library",
+        "//pkg/controllers/cluster:go_default_library",
+        "//pkg/controllers/util:go_default_library",
+        "@com_github_golang_glog//:go_default_library",
+        "@com_github_pkg_errors//:go_default_library",
+        "@io_k8s_api//core/v1:go_default_library",
+        "@io_k8s_apimachinery//pkg/labels:go_default_library",
+        "@io_k8s_apimachinery//pkg/selection:go_default_library",
+        "@io_k8s_apimachinery//pkg/util/runtime:go_default_library",
+        "@io_k8s_apimachinery//pkg/util/wait:go_default_library",
+        "@io_k8s_client_go//informers/core/v1:go_default_library",
+        "@io_k8s_client_go//kubernetes:go_default_library",
+        "@io_k8s_client_go//listers/core/v1:go_default_library",
+        "@io_k8s_client_go//tools/cache:go_default_library",
+        "@io_k8s_client_go//util/workqueue:go_default_library",
+    ],
+)
+
+go_test(
+    name = "go_default_test",
+    srcs = [
+        "cluster_labeler_test.go",
+        "selectors_test.go",
+    ],
+    embed = [":go_default_library"],
+    deps = [
+        "//pkg/cluster:go_default_library",
+        "//pkg/cluster/innodb:go_default_library",
+        "//pkg/constants:go_default_library",
+        "//pkg/controllers/util:go_default_library",
+        "@io_k8s_api//core/v1:go_default_library",
+        "@io_k8s_apimachinery//pkg/apis/meta/v1:go_default_library",
+        "@io_k8s_client_go//informers:go_default_library",
+        "@io_k8s_client_go//kubernetes/fake:go_default_library",
+        "@io_k8s_client_go//testing:go_default_library",
+    ],
+)

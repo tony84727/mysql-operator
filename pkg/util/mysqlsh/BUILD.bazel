@@ -1,0 +1,31 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "go_default_library",
+    srcs = [
+        "mysqlsh.go",
+        "options.go",
+    ],
+    importpath = "github.com/oracle/mysql-operator/pkg/util/mysqlsh",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//pkg/cluster/innodb:go_default_library",
+        "@com_github_golang_glog//:go_default_library",
+        "@com_github_pkg_errors//:go_default_library",
+        "@io_k8s_utils//exec:go_default_library",
+    ],
+)
+
+go_test(
+    name = "go_default_test",
+    srcs = [
+        "mysqlsh_test.go",
+        "options_test.go",
+    ],
+    embed = [":go_default_library"],
+    deps = [
+        "@com_github_stretchr_testify//assert:go_default_library",
+        "@io_k8s_utils//exec:go_default_library",
+        "@io_k8s_utils//exec/testing:go_default_library",
+    ],
+)

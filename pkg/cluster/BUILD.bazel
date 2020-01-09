@@ -1,0 +1,23 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "go_default_library",
+    srcs = [
+        "cluster_health.go",
+        "instance.go",
+    ],
+    importpath = "github.com/oracle/mysql-operator/pkg/cluster",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//pkg/cluster/innodb:go_default_library",
+        "@com_github_heptiolabs_healthcheck//:go_default_library",
+        "@com_github_pkg_errors//:go_default_library",
+    ],
+)
+
+go_test(
+    name = "go_default_test",
+    srcs = ["instance_test.go"],
+    embed = [":go_default_library"],
+    deps = ["@com_github_stretchr_testify//assert:go_default_library"],
+)

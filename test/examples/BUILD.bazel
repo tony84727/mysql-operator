@@ -1,0 +1,11 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_test")
+
+go_test(
+    name = "go_default_test",
+    srcs = ["examples_test.go"],
+    deps = [
+        "//pkg/apis/mysql/v1alpha1:go_default_library",
+        "@com_github_ghodss_yaml//:go_default_library",
+        "@io_k8s_api//core/v1:go_default_library",
+    ],
+)

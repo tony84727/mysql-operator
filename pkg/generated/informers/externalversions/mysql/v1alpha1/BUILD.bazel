@@ -1,0 +1,24 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "go_default_library",
+    srcs = [
+        "backup.go",
+        "backupschedule.go",
+        "cluster.go",
+        "interface.go",
+        "restore.go",
+    ],
+    importpath = "github.com/oracle/mysql-operator/pkg/generated/informers/externalversions/mysql/v1alpha1",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//pkg/apis/mysql/v1alpha1:go_default_library",
+        "//pkg/generated/clientset/versioned:go_default_library",
+        "//pkg/generated/informers/externalversions/internalinterfaces:go_default_library",
+        "//pkg/generated/listers/mysql/v1alpha1:go_default_library",
+        "@io_k8s_apimachinery//pkg/apis/meta/v1:go_default_library",
+        "@io_k8s_apimachinery//pkg/runtime:go_default_library",
+        "@io_k8s_apimachinery//pkg/watch:go_default_library",
+        "@io_k8s_client_go//tools/cache:go_default_library",
+    ],
+)
